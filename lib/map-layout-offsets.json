@@ -6332,5 +6332,29 @@
     "rotation": 0,
     "layer": 0,
     "hidden": false
+  },
+  "rodolfo-monegatto": {
+    "x": 43.99,
+    "y": -4.43,
+    "scale": 1,
+    "rotation": 0,
+    "layer": 5,
+    "hidden": false
+  },
+  "laila-lafloufa": {
+    "x": 104.65,
+    "y": -77.76,
+    "scale": 0.6,
+    "rotation": 0,
+    "layer": 0,
+    "hidden": false
+  },
+  "mario-lucio": {
+    "x": 29.82,
+    "y": 24.87,
+    "scale": 1,
+    "rotation": 0,
+    "layer": 0,
+    "hidden": false
   }
 }

@@ -168,6 +168,12 @@ export default function ModularMap({ selected, onSelect }: { selected: string | 
 
           <rect x={-destination.width/2} y={1-destination.height} width={destination.width} height={destination.height+1} rx={5} fill="transparent"/>
           {destination.spriteFrame ? <svg x={-destination.width/2} y={1-destination.height} width={destination.width} height={destination.height} viewBox={`${destination.spriteFrame.x} ${destination.spriteFrame.y} ${destination.spriteFrame.width} ${destination.spriteFrame.height}`} overflow="hidden" pointerEvents="none"><image href={assetUrl(destination.file)} width={destination.spriteFrame.sourceWidth} height={destination.spriteFrame.sourceHeight}/></svg> : <image transform={destination.id==='natalia-vannuchi'?'scale(-1 1)':undefined} href={assetUrl(destination.file)} x={-destination.width/2} y={1-destination.height} width={destination.width} height={destination.height} pointerEvents="none"/>}
+          {destination.id==='henrique-hardman'&&<g pointerEvents="none" aria-label="Fantasma do Silvio Santos rondando Henrique">
+            <g transform="translate(38 -22)">
+              <animateTransform attributeName="transform" type="translate" values="38 -22;0 -52;-38 -22;0 -8;38 -22" keyTimes="0;.25;.5;.75;1" calcMode="spline" keySplines=".42 0 .58 1;.42 0 .58 1;.42 0 .58 1;.42 0 .58 1" dur="12s" repeatCount="indefinite"/>
+              <image href={assetUrl('/images/modular/silvio-santos-fantasma-v02.webp')} x="-14" y="-42" width="28" height="42" opacity=".78"/>
+            </g>
+          </g>}
         </g>;
       }
       if (destination.type === 'garden') return <GardenStudyProp key={destination.id} item={destination}/>;
@@ -241,7 +247,10 @@ export default function ModularMap({ selected, onSelect }: { selected: string | 
     <MovableMapElement id="plaza-argentine-obelisk"><image href={assetUrl("/images/modular/plaza-obelisco-argentino-v01.webp")} x="790" y="700" width="57" height="180" pointerEvents="none"/></MovableMapElement>
     <MovableMapElement id="plaza-rbd-stage"><image href={assetUrl("/images/modular/plaza-palco-rbd-v01.webp")} x="1000" y="730" width="200" height="157" pointerEvents="none"/></MovableMapElement>
     <MovableMapElement id="editable-residential-building"><image href={assetUrl("/images/modular/metropole-residencial-v01.webp")} x="780" y="860" width="95" height="120" pointerEvents="none"/></MovableMapElement>
-    <MovableMapElement id="central-circular-square" locked><image href={assetUrl("/images/modular/praca-central-circular-v01.webp")} x="760" y="720" width="300" height="224.8" pointerEvents="none"/></MovableMapElement>
+    <MovableMapElement id="central-circular-square" locked>
+      {/* Seasonal artwork. The regular plaza is praca-central-circular-v01.webp. */}
+      <image aria-label="Pracinha com trabalhadores montando árvores de Natal" href={assetUrl("/images/modular/praca-central-natal-montagem-v01.webp")} x="760" y="720" width="300" height="224.8" pointerEvents="none"/>
+    </MovableMapElement>
     <MovableMapElement id="linkedin-building-reimport-v02"><image href={assetUrl("/images/modular/linkedin-predio-v02.webp")} x="1100" y="750" width="175" height="137.4" pointerEvents="none"/></MovableMapElement>
     <MovableMapElement id="desert-camel"><image href={assetUrl("/images/modular/deserto-camelo-v01.webp")} x="1550" y="35" width="78" height="65" pointerEvents="none"/></MovableMapElement>
     <MovableMapElement id="desert-editable-dune"><image href={assetUrl("/images/modular/deserto-dunas-v01.webp")} x="1510" y="-60" width="340" height="195" pointerEvents="none"/></MovableMapElement>
