@@ -25,7 +25,7 @@ const targets:Target[]=[...mapCharacters, ...modularDestinations.map<Target>(d=>
 const destinationPortraits:Record<string,string>={"pingos-nos-ins":"pingos-nos-ins-redacao-v04.webp","east-cafe":cafeArtwork,"colabin":"colabin-laboratorio-v02.webp","vagao-feminino":"metro-vagao-feminino-v04.webp","livrinhoteca":"livrinhoteca-isometrico-v01.webp","cineminha":"cineminha-isometrico-v01.webp","mercado-vagas":"mercado-vagas-isometrico-v01.webp","prefeintura":"prefeitura-render-v02.webp","taverna-joguins":"taverna-medieval-games-v04.webp","pracinha":"praca-central-circular-v01.webp","espacin-coloridin":"coloridin-arco-iris-frontal-v02.webp","linkedin":"linkedin-predio-v02.webp","jardim-secreto":"rosa-arvore-isometrica-v01.webp","estudio-criativins":"estudio-render-v02.webp","silicin-valley":"silicin-campus-v02.webp","departamento-xerifins":"xerifins-departamento-v01.webp","inglish-pub":"inglish-pub-render-v02.webp","oficina-vendinhas":"feira-roupas-v01.webp","torre-mistica":"torre-feiticaria-v02.webp","plaza-hispanica":"plaza-arcada-bandeiras-v02.webp","academia-marombins":"academia-render-v02.webp","binstro":"binstro-render-v02.webp","paises-africanos":"aeroporto-internacional-v02.webp"};
 // Crop the existing illustration to the head without exposing the map pose or props.
 const facePortraits:Record<string,{width:number;height:number;crop:[number,number,number]}>= {
-  'sophia-spadao':{width:1024,height:1536,crop:[310,0,400]},
+  'sophia-spadao':{width:1024,height:1536,crop:[301,0,400]},
   'alana-becherer':{width:1024,height:1536,crop:[40,0,590]},
   'camilla-toscano':{width:1024,height:1536,crop:[310,5,520]},
   'soraia-santos':{width:768,height:1024,crop:[185,5,390]},
@@ -67,7 +67,7 @@ const facePortraits:Record<string,{width:number;height:number;crop:[number,numbe
   'caio-ciappina':{width:1024,height:1536,crop:[235,55,360]},
   'andre-luiz-fernandes':{width:1024,height:1536,crop:[220,20,470]},
   'matheus-monteiro':{width:1024,height:1536,crop:[230,30,440]},
-  'victoria-hang':{width:1024,height:1536,crop:[300,75,390]},
+  'victoria-hang':{width:1024,height:1536,crop:[221,0,561]},
   'simone-lapa':{width:1448,height:1086,crop:[475,15,500]},
   'gustavo-pontes':{width:1199,height:1312,crop:[350,0,560]},
   'camila-ochoa':{width:1317,height:1194,crop:[300,15,680]},
@@ -89,6 +89,9 @@ const facePortraits:Record<string,{width:number;height:number;crop:[number,numbe
   'gabriela-ribeiro':{width:1024,height:1536,crop:[510,34,450]},
   'eduardo-mesquita':{width:1024,height:1536,crop:[275,10,470]},
   'jakeline-sakamoto':{width:1024,height:1536,crop:[255,30,505]},
+  'rodolfo-monegatto':{width:512,height:768,crop:[150,0,235]},
+  'mario-lucio':{width:512,height:768,crop:[158,132,165]},
+  'laila-lafloufa':{width:1199,height:1312,crop:[294,8,595]},
   'tiago-vieira':{width:1083,height:1453,crop:[240,6,515]},
   'eric-barros':{width:1024,height:1536,crop:[300,0,430]},
   'melissa-augustin':{width:1024,height:1536,crop:[170,15,470]},
@@ -105,13 +108,13 @@ const facePortraits:Record<string,{width:number;height:number;crop:[number,numbe
   'henrique-hardman':{width:1199,height:1312,crop:[450,15,540]},
   'patrick-canuto':{width:1024,height:1536,crop:[250,20,510]},
   'paula-lotti':{width:1024,height:1536,crop:[270,20,420]},
-  'gabriel-martins':{width:1024,height:1536,crop:[260,55,490]},
+  'gabriel-martins':{width:1024,height:1536,crop:[253,12,520]},
   'nathan-machado':{width:1024,height:1536,crop:[250,35,490]},
   'kauana-moreira':{width:1024,height:1536,crop:[285,0,440]},
 };
 function Portrait({target,optimized=false}:{target:Target;optimized?:boolean}){
   const mirrored=target.id==='naiane-de-mello'||target.id==='luara-nardelli'||target.id==='natalia-vannuchi';
-  if(optimized)return <img className="portrait" aria-hidden="true" alt="" src={assetUrl(`/images/menu-portraits/${target.id}.webp`)} style={{objectFit:'contain',transform:mirrored?'scaleX(-1)':undefined}}/>;
+  if(optimized)return <img className="portrait" aria-hidden="true" alt="" src={assetUrl(`/images/menu-portraits/${target.id==='gabriel-martins'?'gabriel-martins-pb-v01':target.id}.webp`)} style={{objectFit:'contain',transform:mirrored?'scaleX(-1)':undefined}}/>;
   const person=mapCharacters.find(p=>p.id===target.id),face=facePortraits[target.id];
   if(person&&face){const [x,y,size]=face.crop;return <svg className="portrait face-portrait" style={{transform:mirrored?'scaleX(-1)':undefined}} aria-hidden="true" viewBox={`${x} ${y} ${size} ${size}`}><image href={assetUrl(person.file)} width={face.width} height={face.height}/></svg>;}
   return <img className="portrait" aria-hidden="true" alt="" src={assetUrl(`/images/modular/${destinationPortraits[target.id]}`)} style={{objectFit:'contain'}}/>;
@@ -155,8 +158,15 @@ export default function ExplorationGame({optimized=false,hd=false,hdManifest}:{o
     }
     const melissa=layoutOffsets['melissa-augustin']??{x:0,y:0};
     if((melissa.layer??0)<gardenLayer+2)updates['melissa-augustin']={...melissa,layer:gardenLayer+2};
+    const rodolfo=layoutOffsets['rodolfo-monegatto']??{x:0,y:0};
+    const topOtherLayer=Math.max(gardenLayer+2,...Object.entries(layoutOffsets)
+      .filter(([id])=>id!=='rodolfo-monegatto')
+      .map(([,offset])=>offset.layer??0));
+    if(editing&&(rodolfo.layer??0)<=topOtherLayer) {
+      updates['rodolfo-monegatto']={...rodolfo,layer:topOtherLayer+1};
+    }
     if(Object.keys(updates).length)setLayoutOffsets(prev=>({...prev,...updates}));
-  },[layoutOffsets,layoutReady]);
+  },[editing,layoutOffsets,layoutReady]);
   useEffect(()=>{if(localEditor&&layoutReady){try{localStorage.setItem('amiguins-map-layout-v1',JSON.stringify(layoutOffsets));}catch{}}},[layoutOffsets,layoutReady,localEditor]);
   function moveElement(id:string,x:number,y:number,begin=false){
     if(begin){layoutHistory.current.push(layoutOffsets);if(layoutHistory.current.length>100)layoutHistory.current.shift();}
